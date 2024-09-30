@@ -8,8 +8,11 @@ export default function Home() {
     <>
       <h1>Jogo da Velha</h1>
 
-      <button onClick={() => navigate("/singleplayer")}>SinglePlayer</button>
-      <button onClick={() => navigate("/multiplayer")}>MultiPlayer</button>
+      <div className="buttons-row">
+        <button className="single" onClick={() => navigate("/singleplayer")}>SinglePlayer</button>
+        <button className="multi" onClick={() => navigate("/multiplayer")}>MultiPlayer</button>
+      </div>
+
     </>
   );
 }
