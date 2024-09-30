@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import "../MultiPlayer/style.css";
+import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 export default function SinglePlayer() {
+  const navigate = useNavigate();
+
   const quadroVazio = Array(9).fill("");
   const jogador1 = "X";
   const jogador2 = "O";
@@ -125,7 +128,7 @@ export default function SinglePlayer() {
 
   return (
     <>
-      <div className={`quadro ${vencedor ? "game-over" : ""}`}>
+      <div className={`quadro quadro-singleplayer ${vencedor ? "game-over" : ""}`}>
         {quadro.map((item, index) => (
           <div
             key={index}
@@ -139,7 +142,10 @@ export default function SinglePlayer() {
         ))}
       </div>
 
-      <button onClick={() => resetarJogo()}>Reiniciar Jogo</button>
+      <div className="buttons-row">
+        <button onClick={() => navigate("/")}>Voltar</button>
+        <button onClick={() => resetarJogo()}>Reiniciar Jogo</button>
+      </div>
     </>
   );
 }
