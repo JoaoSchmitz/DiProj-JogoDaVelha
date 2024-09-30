@@ -1,2 +1,21 @@
-.placeholder {
-}
+/* style.css */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .single{
+    border-color: orange;
+  }
+
+  .multi{
+    border-color: purple;
+  }
