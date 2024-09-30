@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Underdog", system-ui;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,27 +31,27 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 8em;
   line-height: 1.1;
+  color: black;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 3px solid transparent;
+  border-color: black;
+
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: black;
 }
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-color: green;
 }
 
 @media (prefers-color-scheme: light) {
@@ -66,3 +66,74 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.quadro {
+  display: grid;
+  grid-template-columns: repeat(3, 20vh);
+  grid-template-rows: repeat(3, 20vh);
+  gap: 1rem;
+
+  background-size: 100% 100%;
+
+  border-radius: 8px;
+  padding: 1rem;
+  scale: 0.8;
+}
+
+.quadro.game-over {
+  opacity: 0.8;
+  background-color: green;
+}
+
+.celula {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+  font-size: 3rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  border-radius: 8px;
+  border: 3px solid transparent;
+
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: black;
+}
+
+.celula:not(.O):not(.X):hover {
+  border: 3px solid transparent;
+  border-color: black;
+
+}
+
+.celula.O,
+.celula.X,
+.game-over .celula {
+  cursor: not-allowed;
+  border: 0px solid transparent;
+}
+
+
+.quadro-singleplayer {
+  background-color: orange;
+}
+
+.quadro-multiplayer {
+  background-color: purple;
+}
+
+
+.buttons-row{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
