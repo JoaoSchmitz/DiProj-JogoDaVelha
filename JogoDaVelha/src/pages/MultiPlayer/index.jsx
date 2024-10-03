@@ -1,102 +1,164 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MyButton from "../../components/MyButton";
 import "./style.css";
 
 export default function MultiPlayer() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const quadroVazio = Array(9).fill("");
-  const jogador1 = "X";
-  const jogador2 = "O";
+  const emptyBoard = Array(9).fill("");
+  const player1 = location.state.player01Symbol;
+  const player2 = location.state.player02Symbol;
 
-  const [quadro, setQuadro] = useState(quadroVazio);
-  const [jogadorAtual, setJogadorAtual] = useState(jogador1);
-  const [vencedor, setVencedor] = useState(null);
+  const [board, setBoard] = useState(emptyBoard);
+  const [currentPlayer, setCurrentPlayer] = useState(player1);
+  const [winner, setWinner] = useState(null);
+
+  const [player01Points, setPlayer01Points] = useState(0);
+  const [player02Points, setPlayer02Points] = useState(0);
 
   // Realiza as jogadas
-  const handleCelulaClick = (index) => {
+  const handleCellClick = (index) => {
     // Verifica se há um vencedor
-    if (vencedor) {
+    if (winner) {
       console.log("Jogo finalizado.");
       return null;
     }
 
     // Verifica se o local escolhido está vazio
-    if (quadro[index] !== "") {
+    if (board[index] !== "") {
       return null;
     }
 
     // Realiza a jogada
-    quadro[index] = jogadorAtual;
+    board[index] = currentPlayer;
 
     // Muda o turno e checa se teve um vencedor ou aconteceu um empate
-    setJogadorAtual(jogadorAtual === jogador1 ? jogador2 : jogador1);
-    checarEmpate();
-    checarVencedor();
+    setCurrentPlayer(currentPlayer === player1 ? player2 : player1);
+    checkDraw();
+    checkWin();
   };
 
   // Verifica se tem um vencedor
-  const checarVencedor = () => {
+  const checkWin = () => {
     // Lista todas as possibilidades de vencer
-    const possibilidadesDeVencer = [
-      [quadro[0], quadro[1], quadro[2]],
-      [quadro[3], quadro[4], quadro[5]],
-      [quadro[6], quadro[7], quadro[8]],
+    const winningPossibilities = [
+      [board[0], board[1], board[2]],
+      [board[3], board[4], board[5]],
+      [board[6], board[7], board[8]],
 
-      [quadro[0], quadro[3], quadro[6]],
-      [quadro[1], quadro[4], quadro[7]],
-      [quadro[2], quadro[5], quadro[8]],
+      [board[0], board[3], board[6]],
+      [board[1], board[4], board[7]],
+      [board[2], board[5], board[8]],
 
-      [quadro[0], quadro[4], quadro[8]],
-      [quadro[2], quadro[4], quadro[6]],
+      [board[0], board[4], board[8]],
+      [board[2], board[4], board[6]],
     ];
 
     // Para cada possibilidade de vencer, verifica se ela ocorreu
-    possibilidadesDeVencer.forEach((celulas) => {
-      // Verifica se o jogador1 venceu
-      if (celulas.every((celula) => celula === jogador1)) {
-        setVencedor(jogador1);
+    winningPossibilities.forEach((cells) => {
+      // Verifica se o player1 venceu
+      if (cells.every((cell) => cell === player1)) {
+        setWinner(player1);
+        setPlayer01Points(player01Points + 1);
       }
-      // Verifica se o jogador2 venceu
-      if (celulas.every((celula) => celula === jogador2)) {
-        setVencedor(jogador2);
+      // Verifica se o player2 venceu
+      if (cells.every((cell) => cell === player2)) {
+        setWinner(player2);
+        setPlayer02Points(player02Points + 1);
       }
     });
   };
 
   // Verifica se houve um empate
-  const checarEmpate = () => {
-    if (quadro.every((item) => item !== "")) {
-      setVencedor("E");
+  const checkDraw = () => {
+    if (board.every((item) => item !== "")) {
+      setWinner("E");
     }
   };
 
-  // Limpa o quadro do jogo e começa novamente
-  const resetarJogo = () => {
-    setJogadorAtual(jogador1);
-    setQuadro(quadroVazio);
-    setVencedor(null);
+  // Limpa o board do jogo e começa novamente
+  const resetGame = () => {
+    setCurrentPlayer(player1);
+    setBoard(emptyBoard);
+    setWinner(null);
+  };
+
+  // Limpa o scoreboard do jogo e começa novamente
+  const resetScoreboard = () => {
+    resetGame();
+    setPlayer01Points(0);
+    setPlayer02Points(0);
   };
 
   return (
-    <>
-      <div className={`quadro quadro-multiplayer ${vencedor ? "game-over" : ""}`}>
-        {quadro.map((item, index) => (
-          <div
-            key={index}
-            className={`celula ${item}`}
-            onClick={() => handleCelulaClick(index)}
+    <section className="game-screen">
+      <section className="board-scoreboard-container">
+        {/* Placar Player01 */}
+        <div
+          className={`scoreboard ${winner === player1 ? "winner" : ""}`}
+        >
+          <h2 className="scoreboard-player-title">
+            {localStorage.getItem("player01")}
+          </h2>
+          <p className="scoreboard-player-score">{player01Points}</p>
+          <p
+            className={`scoreboard-player-title scoreboard-player-winner ${
+              winner === player1 ? "active" : winner === "E" ? "draw" : ""
+            }`}
           >
-            {item}
-          </div>
-        ))}
-      </div>
+            {winner === player1
+              ? "Venceu!!!"
+              : winner === "E"
+              ? "Empate!"
+              : ""}
+          </p>
+        </div>
 
+        {/* Board do Jogo */}
+        <div
+          className={`board board-multiplayer ${winner ? "game-over" : ""}`}
+        >
+          {board.map((item, index) => (
+            <div
+              key={index}
+              className={`cell ${item}`}
+              onClick={() => handleCellClick(index)}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+
+        {/* Placar Player02 */}
+        <div
+          className={`scoreboard ${winner === player2 ? "winner" : ""}`}
+        >
+          <h2 className="scoreboard-player-title">
+            {localStorage.getItem("player02")}
+          </h2>
+          <p className="scoreboard-player-score">{player02Points}</p>
+          <p
+            className={`scoreboard-player-title scoreboard-player-winner ${
+              winner === player2 ? "active" : winner === "E" ? "draw" : ""
+            }`}
+          >
+            {winner === player2
+              ? "Venceu!!!"
+              : winner === "E"
+              ? "Empate!"
+              : ""}
+          </p>
+        </div>
+      </section>
+
+      {/* Botões */}
       <div className="buttons-row">
+        <MyButton value="Reiniciar Placar" action={() => resetScoreboard()} />
         <MyButton value="Voltar" action={() => navigate("/")} />
-        <MyButton value="Reiniciar Jogo" action={() => resetarJogo()}/>
+        <MyButton value="Reiniciar Jogo" action={() => resetGame()} />
       </div>
-    </>
+    </section>
   );
 }

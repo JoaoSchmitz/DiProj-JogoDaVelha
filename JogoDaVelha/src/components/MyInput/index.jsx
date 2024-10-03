@@ -1,22 +1,21 @@
+import { useState } from "react";
 import "./style.css";
 
 export default function MyInput({ label, value }) {
+  const [name, setName] = useState("");
+
   return (
     <div className="input-box">
       <label className="label-text">{label}</label>
       <input
-        className="name-input"
-        style={
-          localStorage.getItem(value) !== "" ? { borderColor: "green" } : {}
-        }
+        id="name"
+        className={`name-input ${name !== "" ? "active" : ""}`}
         type="text"
-        maxlength={30}
-        placeholder={
-          localStorage.getItem(value) !== ""
-            ? localStorage.getItem(value)
-            : ""
-        }
-        onChange={(e) => localStorage.setItem(value, e.target.value)}
+        maxlength={15}
+        onChange={(e) => {
+          localStorage.setItem(value, e.target.value);
+          setName(e.target.value);
+        }}
       />
     </div>
   );

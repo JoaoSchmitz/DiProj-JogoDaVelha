@@ -49,26 +49,80 @@ h1 {
   }
 }
 
+.game-screen {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 
-.quadro {
+.board-scoreboard-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 25vw;
+  box-shadow: 0px 0px 5px grey;
+  border-radius: 5%;
+  transition: 0.4s ease-in-out;
+}
+.scoreboard.winner {
+  box-shadow: 0px 0px 25px green;
+}
+
+.scoreboard-player-title {
+  height: 7vh;
+  margin: 0 auto;
+  font-size: 3em;
+  color: black;
+  font-family: inherit;
+}
+
+.scoreboard-player-score {
+  margin: 0 auto;
+  font-size: 8em;
+  color: black;
+  font-family: inherit;
+}
+
+.scoreboard-player-winner {
+  width: 0vw;
+  overflow: hidden;
+  color: green;
+  transition: width 0.7s ease-in-out;
+  font-weight: bold;
+}
+.scoreboard-player-winner.active {
+  width: 10vw;
+}
+.scoreboard-player-winner.draw {
+  width: 10vw;
+  color: black;
+}
+
+.board {
   display: grid;
-  grid-template-columns: repeat(3, 20vh);
-  grid-template-rows: repeat(3, 20vh);
+  grid-template-columns: repeat(3, 16vh);
+  grid-template-rows: repeat(3, 16vh);
   gap: 1rem;
 
   background-size: 100% 100%;
 
   border-radius: 8px;
   padding: 1rem;
-  scale: 0.8;
 }
 
-.quadro.game-over {
+.board.game-over {
   opacity: 0.8;
   background-color: green;
 }
 
-.celula {
+.cell {
   display: grid;
   align-items: center;
   justify-content: center;
@@ -84,19 +138,18 @@ h1 {
 
   background-color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.4s;
   color: black;
 }
 
-.celula:not(.O):not(.X):hover {
+.cell:not(.O):not(.X):hover {
   border: 3px solid transparent;
   border-color: black;
-
 }
 
-.celula.O,
-.celula.X,
-.game-over .celula {
+.cell.O,
+.cell.X,
+.game-over .cell {
   cursor: not-allowed;
   border: 0px solid transparent;
 }

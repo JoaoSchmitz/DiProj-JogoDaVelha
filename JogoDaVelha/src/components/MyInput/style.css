@@ -34,3 +34,7 @@
 .name-input:focus {
   border-color: green;
 }
+
+.active {
+  border-color: green;
+}

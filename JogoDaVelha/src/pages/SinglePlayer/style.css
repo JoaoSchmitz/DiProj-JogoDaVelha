@@ -1,3 +1,31 @@
-.quadro-singleplayer {
+.board-singleplayer {
   background-color: orange;
+}
+
+.loading-box {
+  height: 8em;
+}
+
+.bot-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 10px solid goldenrod;
+  border-top-color: var(--green);
+  animation: loading-circle 1s linear infinite;
+}
+
+@keyframes loading-circle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
