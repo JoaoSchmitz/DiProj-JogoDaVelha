@@ -1,0 +1,27 @@
+button {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  border-color: black;
+
+  transition: border-color 0.25s;
+  background-color: white;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+
+  font-size: 1.5em;
+  font-weight: 500;
+  font-family: inherit;
+  color: black;
+
+}
+button:hover {
+  border-color: green;
+}
+
+.single {
+  border-color: orange;
+}
+
+.multi {
+  border-color: purple;
+}

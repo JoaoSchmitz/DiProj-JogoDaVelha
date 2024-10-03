@@ -36,24 +36,6 @@ h1 {
   color: black;
 }
 
-button {
-  border-radius: 8px;
-  border: 3px solid transparent;
-  border-color: black;
-
-  padding: 0.6em 1.2em;
-  font-size: 1.5em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: white;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  color: black;
-}
-button:hover {
-  border-color: green;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -119,21 +101,10 @@ button:hover {
   border: 0px solid transparent;
 }
 
-
-.quadro-singleplayer {
-  background-color: orange;
-}
-
-.quadro-multiplayer {
-  background-color: purple;
-}
-
-
-.buttons-row{
+.buttons-row {
   display: flex;
   flex-direction: row;
   gap: 16px;
   justify-content: center;
   align-items: center;
 }
-

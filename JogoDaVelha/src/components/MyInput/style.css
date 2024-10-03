@@ -1,0 +1,36 @@
+.input-box {
+  width: 25vw;
+  margin: 2vh auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.label-text {
+  margin-top: .5vh;
+  width: 10vw;
+  font-size: 1.2em;
+  color: black;
+}
+
+.name-input {
+  width: 15vw;
+  height: 3vh;
+
+  background-color: white;
+
+  font-family: inherit;
+  font-size: large;
+  color: black;
+  text-align: center;
+
+  border: none;
+  border-bottom: 3px solid black;
+  border-radius: 5px;
+
+  outline: none;
+  transition: border-color 0.25s ease-in-out;
+}
+.name-input:focus {
+  border-color: green;
+}

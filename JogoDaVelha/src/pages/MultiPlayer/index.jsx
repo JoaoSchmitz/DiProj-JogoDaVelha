@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MyButton from "../../components/MyButton";
 import "./style.css";
 
 export default function MultiPlayer() {
@@ -93,8 +94,8 @@ export default function MultiPlayer() {
       </div>
 
       <div className="buttons-row">
-        <button onClick={() => navigate("/")}>Voltar</button>
-        <button onClick={() => resetarJogo()}>Reiniciar Jogo</button>
+        <MyButton value="Voltar" action={() => navigate("/")} />
+        <MyButton value="Reiniciar Jogo" action={() => resetarJogo()}/>
       </div>
     </>
   );
