@@ -6,7 +6,7 @@ Este repositório tem como objetivo desenvolver um site onde é possível jogar 
 
 Você pode jogar à vontade no seguinte link:
 <br>
-[Jogo Da Velha](https://jogo-da-velha-diproj.vercel.app/)
+[Jogo Da Velha](https://diproj-jogo-da-velha.vercel.app/)
 
 ## Rodar localmente
 
